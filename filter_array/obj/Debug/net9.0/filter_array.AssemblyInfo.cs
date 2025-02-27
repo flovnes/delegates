@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("filter_array")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+101055b25399d4d254f311f241765d6f3bb2a381")]
 [assembly: System.Reflection.AssemblyProductAttribute("filter_array")]
 [assembly: System.Reflection.AssemblyTitleAttribute("filter_array")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

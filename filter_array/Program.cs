@@ -8,12 +8,25 @@
             Filter checkIsDivisible = x => x % k == 0; 
 
             FilterLinq(array, checkIsDivisible);           
-            FilterManual(array, checkIsDivisible);           
+            FilterManual(array, checkIsDivisible);   
         }
         public static int[] FilterLinq(int[] arr, Filter check) {
             return [.. arr.Where((x) => check(x))];
         }
 
-        
+        public static int[] FilterManual(int[] arr, Filter check) {
+            int new_size = 0;
+            for (int i = 0; i < arr.Length; ++i)
+                if (check(arr[i]))
+                    new_size++;
+            
+            int[] new_arr = new int[new_size];
+            for (int i = 0, j = 0; i < new_size; ++i) {
+                if (check(arr[i]))
+                    new_arr[j++] = arr[i];
+            }
+
+            return new_arr;
+        }
     }
 }
