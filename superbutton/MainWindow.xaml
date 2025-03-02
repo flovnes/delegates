@@ -1,0 +1,35 @@
+﻿<Window x:Class="superbuttonLab.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:superbuttonLab"
+        mc:Ignorable="d"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Title="MainWindow" Height="450" Width="380">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Змінити колір" HorizontalAlignment="Center" VerticalAlignment="Center" Width="180" Height="40" Grid.Row="1" Click="Button_Click_Color"/>
+        <Button Content="Змінити прозорість" HorizontalAlignment="Center" VerticalAlignment="Center" Width="180" Height="40" Grid.Row="2" Click="Button_Click_Opacity"/>
+        <Button Content="Надіслати привіт" HorizontalAlignment="Center" VerticalAlignment="Center" Width="180" Height="40" Grid.Row="3" Click="Button_Click_Hello"/>
+        <Button x:Name="superButton" Content="Супер кнопка" HorizontalAlignment="Center" VerticalAlignment="Center" Width="310" Height="40" Grid.Row="4" Grid.ColumnSpan="2" Click="Button_Click_Super"/>
+        <CheckBox x:Name="checkColor" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="16" Grid.Column="1" Grid.Row="3" Click="CheckBox_Click_Hello"/>
+        <CheckBox x:Name="checkOpacity" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="16" Grid.Column="1" Grid.Row="2" Click="CheckBox_Click_Opacity"/>
+        <CheckBox x:Name="checkHello" HorizontalAlignment="Left" VerticalAlignment="Center" Height="16" Width="16" Grid.Column="1" Grid.Row="1" Click="CheckBox_Click_Color"/>
+        <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="380" MouseLeftButtonDown="DragBar_MouseDown" Cursor="Hand" Stroke="Black" Fill="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"/>
+        <Button Grid.Column="1" Content="ехіт" HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="25" Margin="102,0,0,0" Click="Button_CloseWindow" RenderTransformOrigin="0.515,0.193"/>
+
+    </Grid>
+</Window>
