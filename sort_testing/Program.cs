@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace SortingVerificationSystem
+namespace SortTestingLab
 {
-    class Program
+    class Testing
     {
         public delegate void SortMethod<T>(T[] array) where T : IComparable<T>;
         
@@ -22,23 +22,17 @@ namespace SortingVerificationSystem
             VerifySorting(
                 SelectionSortEtalon,
                 SelectionSortStudent,
-                "Сортування вибором",
                 testArrays,
                 IsTimeAcceptable
             );
 
-            // Перевірка шейкерного сортування
-            Console.WriteLine("\nПЕРЕВІРКА ШЕЙКЕРНОГО СОРТУВАННЯ:");
+            Console.WriteLine("\nSHAKER SORT:");
             VerifySorting(
                 ShakerSortEtalon,
                 ShakerSortStudent,
-                "Шейкерне сортування",
                 testArrays,
                 IsTimeAcceptable
             );
-
-            Console.WriteLine("\nПеревірка завершена.");
-            Console.ReadKey();
         }
 
         static void SelectionSortEtalon<T>(T[] array) where T : IComparable<T>
@@ -127,7 +121,7 @@ namespace SortingVerificationSystem
             {
                 for (int i = left; i < right; i++)
                 {
-                    if (array[i].CompareTo(array[i + 1]) < 0) // Помилка тут
+                    if (array[i].CompareTo(array[i + 1]) < 0) // !
                     {
                         T temp = array[i];
                         array[i] = array[i + 1];
@@ -138,7 +132,7 @@ namespace SortingVerificationSystem
 
                 for (int i = right; i > left; i--)
                 {
-                    if (array[i].CompareTo(array[i - 1]) > 0) // Помилка тут
+                    if (array[i].CompareTo(array[i - 1]) > 0) // !
                     {
                         T temp = array[i];
                         array[i] = array[i - 1];
@@ -296,19 +290,18 @@ namespace SortingVerificationSystem
         static void VerifySorting<T>(
             SortMethod<T> etalonMethod,
             SortMethod<T> studentMethod,
-            string algorithmName,
             Dictionary<string, T[]> testArrays,
             TimeVerifier timeVerifier) where T : IComparable<T>
         {
             foreach (var testCase in testArrays)
             {
-                Console.WriteLine($"\n TEST DATA : {testCase.Key}");
+                Console.WriteLine($"\n DATASET : {testCase.Key}");
                 
                 long etalonTime = MeasureSortingTime(etalonMethod, testCase.Value);
                 
                 if (etalonTime == -1)
                 {
-                    Console.WriteLine("Еталонний метод завершився з помилкою. Пропускаємо тест.");
+                    Console.WriteLine("Runtime Error in standart sort. Test skipped.");
                     continue;
                 }
 
@@ -316,7 +309,7 @@ namespace SortingVerificationSystem
                 
                 if (studentTime == -1)
                 {
-                    Console.WriteLine("РЕЗУЛЬТАТ: НЕ ПРОЙДЕНО (студентський метод завершився з помилкою)");
+                    Console.WriteLine("Result: Runtime error");
                     continue;
                 }
 
@@ -326,19 +319,20 @@ namespace SortingVerificationSystem
                 bool resultsMatch = AreArraysEqual(etalonResult, studentResult);
                 bool timeAcceptable = timeVerifier(etalonTime, studentTime);
 
-                Console.WriteLine($"Час еталонного методу: {etalonTime} мс");
-                Console.WriteLine($"Час студентського методу: {studentTime} мс");
-                Console.WriteLine($"Результати співпадають: {(resultsMatch ? "Так" : "Ні")}");
-                Console.WriteLine($"Час виконання прийнятний: {(timeAcceptable ? "Так" : "Ні")}");
+                Console.WriteLine($"Standart sort time: {etalonTime} мс");
+                Console.WriteLine($"Student sort time: {studentTime} мс");
                 
-                if (resultsMatch && timeAcceptable)
+                string resultMessage = "Accepted";
+                if (!resultsMatch)
                 {
-                    Console.WriteLine("РЕЗУЛЬТАТ: ПРОЙДЕНО");
+                    resultMessage = "Wrong answer";
                 }
-                else
+                else if (!timeAcceptable)
                 {
-                    Console.WriteLine("РЕЗУЛЬТАТ: НЕ ПРОЙДЕНО");
+                    resultMessage = "Time limit exceeded";
                 }
+
+                Console.WriteLine($"Result: {resultMessage}");
             }
         }
     }

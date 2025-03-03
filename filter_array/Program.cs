@@ -11,7 +11,7 @@
             FilterManual(array, checkIsDivisible);   
         }
         public static int[] FilterLinq(int[] arr, Filter check) {
-            return [.. arr.Where((x) => check(x))];
+            return arr.Where((x) => check(x)).ToArray();
         }
 
         public static int[] FilterManual(int[] arr, Filter check) {

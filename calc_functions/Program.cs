@@ -19,6 +19,7 @@
                     string[] data = Console.ReadLine().Trim().Split();
                     int choise = int.Parse(data[0]);
                     int value = int.Parse(data[1]);
+                    
                     Function chosenFunction = functions[choise];
 
                     Console.WriteLine(chosenFunction(value));

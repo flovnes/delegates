@@ -1,6 +1,7 @@
 ﻿namespace FilterArrayLab {
     public class Client {
         public delegate double FractionFormula(int x);
+
         public static void Main() {
             int precision = int.Parse(Console.ReadLine());
 

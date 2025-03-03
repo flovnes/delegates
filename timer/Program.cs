@@ -33,8 +33,8 @@
         
         public static void Main() {
             Timer timer = new(MyFunc, 1000);
-            Timer other_timer = new(MyFunc, 3000);
-            Console.WriteLine("something from the main");
+            Timer other_timer = new(MyFunc, 1000);
+                Console.WriteLine("something from the main");
             Console.ReadLine();
             timer.Stop();
         }
