@@ -107,9 +107,10 @@ namespace SortTestingLab
                     array[i] = array[minIndex];
                     array[minIndex] = temp;
                 }
+
             }
+            System.Threading.Thread.Sleep(4);
             
-            System.Threading.Thread.Sleep(50);
         }
 
         static void ShakerSortStudent<T>(T[] array) where T : IComparable<T>
@@ -119,9 +120,10 @@ namespace SortTestingLab
             
             while (left < right)
             {
+                // desc order
                 for (int i = left; i < right; i++)
                 {
-                    if (array[i].CompareTo(array[i + 1]) < 0) // !
+                    if (array[i].CompareTo(array[i + 1]) < 0)
                     {
                         T temp = array[i];
                         array[i] = array[i + 1];
@@ -132,7 +134,7 @@ namespace SortTestingLab
 
                 for (int i = right; i > left; i--)
                 {
-                    if (array[i].CompareTo(array[i - 1]) > 0) // !
+                    if (array[i].CompareTo(array[i - 1]) > 0)
                     {
                         T temp = array[i];
                         array[i] = array[i - 1];
@@ -169,9 +171,7 @@ namespace SortTestingLab
             int[] array = new int[size];
             
             for (int i = 0; i < size; i++)
-            {
                 array[i] = random.Next(min, max);
-            }
             
             return array;
         }
@@ -182,9 +182,7 @@ namespace SortTestingLab
             int[] array = new int[size];
             
             for (int i = 0; i < size; i++)
-            {
                 array[i] = i;
-            }
             
             for (int i = 0; i < swapCount; i++)
             {
@@ -204,9 +202,7 @@ namespace SortTestingLab
             int[] array = new int[size];
             
             for (int i = 0; i < size; i++)
-            {
                 array[i] = size - i - 1;
-            }
             
             return array;
         }
@@ -222,21 +218,13 @@ namespace SortTestingLab
                 int[] array = content.Split(' ')
                     .Select(s => int.Parse(s))
                     .ToArray();
-                
                 testArrays.Add(fileName, array);
             }
-            
+
             return testArrays;
         }
 
-        static bool IsTimeAcceptable(long etalonTime, long studentTime)
-        {
-            long lowerBound = Math.Max(0, etalonTime / 5 - 200);
-            
-            long upperBound = 5 * etalonTime + 200;
-            
-            return studentTime >= lowerBound && studentTime <= upperBound;
-        }
+        static bool IsTimeAcceptable(long etalonTime, long studentTime) => studentTime < (etalonTime * 1.5);
 
         static long MeasureSortingTime<T>(SortMethod<T> sortMethod, T[] array) where T : IComparable<T>
         {
@@ -245,8 +233,7 @@ namespace SortTestingLab
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             
-            try
-            {
+            try {
                 sortMethod(arrayCopy);
                 stopwatch.Stop();
                 return stopwatch.ElapsedMilliseconds;
@@ -264,8 +251,7 @@ namespace SortTestingLab
             if (array1.Length != array2.Length)
                 return false;
                 
-            for (int i = 0; i < array1.Length; i++)
-            {
+            for (int i = 0; i < array1.Length; i++) {
                 if (array1[i].CompareTo(array2[i]) != 0)
                     return false;
             }
@@ -281,8 +267,7 @@ namespace SortTestingLab
                 sortMethod(arrayCopy);
                 return arrayCopy;
             }
-            catch (Exception)
-            {
+            catch (Exception) {
                 return null;
             }
         }
